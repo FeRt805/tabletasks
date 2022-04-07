@@ -84,7 +84,7 @@
             <td id="cpre" class="pre_itogo">22.3</td>
             <td id="dpre" class="pre_itogo">29.3</td>
           </tr>
-            <td id="everything_sum" colspan="4" class="itogo_num">20.4</td>
+            <td id="team1_everything_sum" colspan="4" class="itogo_num">20.4</td>
         </tbody>
         </table>
 
@@ -93,7 +93,23 @@
         <script type="text/javascript">
             function change(){
                 localStorage.clear()
-                document.getElementById("everything_sum").innerHTML = parseInt(localStorage["team1_a_sum"]) + parseInt(localStorage["team1_b_sum"] + parseInt(localStorage["team1_c_sum"]) + parseInt(localStorage["team1_d_sum"]));
+
+                //// Таблица команды 1
+                // Тема A
+                localStorage["team1_a_sum"] = 0;
+                document.getElementById("apre").innerHTML = localStorage["team1_a_sum"];
+                localStorage["team1_b_sum"] = 0;
+                document.getElementById("bpre").innerHTML = localStorage["team1_b_sum"];
+                localStorage["team1_c_sum"] = 0;
+                document.getElementById("cpre").innerHTML = localStorage["team1_c_sum"];
+                localStorage["team1_d_sum"] = 0;
+                document.getElementById("dpre").innerHTML = localStorage["team1_d_sum"];
+
+                localStorage["team1_sum"] = 0;
+                document.getElementById("team1_everything_sum").innerHTML = localStorage["team1_sum"];
+                
+
+                // document.getElementById("everything_sum").innerHTML = parseInt(localStorage["team1_a_sum"]) + parseInt(localStorage["team1_b_sum"] + parseInt(localStorage["team1_c_sum"]) + parseInt(localStorage["team1_d_sum"]));
             }
         </script>
 
