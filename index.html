@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Решаем задачи</title>
+    <link rel="stylesheet" href="main.css">
+  </head>
+  <body>
+      <h1 class="header" id = "blink1"> Решаем задачи </h1>
+
+    <!-- ТАБЛИЦА 1 -->
+    <table id="team1">
+        <caption> Команда 1 </caption>
+        <tr>
+          <th class="mintablehead">Баллы</th>
+          <!-- ТЕМЫ -->
+          <th class="tema">A</th>
+          <th class="tema">B</th>
+          <th class="tema">C</th>
+          <th class="tema">D</th>
+          </tr>
+        <tbody>
+            <!-- 5 бальные -->
+         <tr>
+          <td class="stoimost">5 </td>
+          <td>
+              <select class="form-select" aria-label="Default select example">
+            <option value="a-5">X</option>
+            <option value="a10">VV</option>
+            <option value="a5">V</option>
+            <option selected value="a0">0</option>
+          </select>
+        </td>
+          <td><select class="form-select" aria-label="Default select example">
+            <option value="b-5">X</option>
+            <option value="b10">VV</option>
+            <option value="b5">V</option>
+            <option selected value="b0">0</option>
+          </select>
+        </td>
+          <td><select class="form-select" aria-label="Default select example">
+            <option value="c-5">X</option>
+            <option value="c10">VV</option>
+            <option value="c5">V</option>
+            <option selected value="c0">0</option>
+          </select>
+        </td>
+          <td><select class="form-select" aria-label="Default select example">
+            <option value="d-5">X</option>
+            <option value="d10">VV</option>
+            <option value="d5">V</option>
+            <option selected value="d0">0</option>
+          </select>
+        </td>
+         </tr>
+         <!-- 10 бальные -->
+        <tr>
+          <td id="10" class="stoimost">10</td>
+          <td>50.2</td>
+          <td>40.63</td>
+          <td>45.23</td>
+          <td>39.3</td>
+        </tr>
+        <tr>
+          <td id="15" class="stoimost">15</td>
+          <td>25.4</td>
+          <td>30.2</td>
+          <td>33.3</td>
+          <td>36.7</td>
+        </tr>
+        <tr>
+          <td id="20" class="stoimost">20 </td>
+          <td>20.4</td>
+          <td>15.6</td>
+          <td>22.3</td>
+          <td>29.3</td>
+        </tr>
+        <tr>
+            <td rowspan="2" id="sum" class="itogo">Итого</td>
+            <td id="apre" class="pre_itogo">20.4</td>
+            <td id="bpre" class="pre_itogo">15.6</td>
+            <td id="cpre" class="pre_itogo">22.3</td>
+            <td id="dpre" class="pre_itogo">29.3</td>
+          </tr>
+            <td id="everything_sum" colspan="4" class="itogo_num">20.4</td>
+        </tbody>
+        </table>
+
+        
+        <button class = "clear_cash" onclick="change()">Очистить кеш</button>
+        <script type="text/javascript">
+            function change(){
+                localStorage.clear()
+                document.getElementById("everything_sum").innerHTML = parseInt(localStorage["team1_a_sum"]) + parseInt(localStorage["team1_b_sum"] + parseInt(localStorage["team1_c_sum"]) + parseInt(localStorage["team1_d_sum"]));
+            }
+        </script>
+
+        <!-- <ul> 
+            <li><button>Суп-харчо</button></li> 
+            <li><a href="linkc2.html">Лилибдж</a></li> 
+            <li><a href="linkc3.html">Чихиртма</a></li> 
+            <li><a href="linkc4.html" class="brd">Шашлык</a></li> 
+           </ul> 
+        <p id="simple">Всё просто</p>
+        <button onclick="change()">Изменить текст</button>
+        <script type="text/javascript">
+            function change(){
+                document.getElementById("simple").innerHTML="Новый текст!";
+            }
+        </script> -->
+    <!-- <h1>Task List</h1>
+    <p id="msg">Current tasks:</p>
+    <ul>
+      <li class="list">Add visual styles</li>
+      <li class="list">Add light and dark themes</li>
+      <li>Enable switching the theme</li>
+    </ul>
+    <div>
+        <button class="btn">Dark</button>
+      </div> -->
+    <script src="app.js"></script>
+    <noscript>You need to enable JavaScript to view the full site.</noscript>
+  </body>
+</html>
