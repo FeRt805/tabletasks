@@ -113,7 +113,7 @@ li {
 
   h1.header{
     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-    text-align: center;
+    text-align: right;
     
   }
 
@@ -172,20 +172,104 @@ li {
   }
 
 
+  body{
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/d/d3/Zxcursed.gif');
+    background-size: cover;
+    
+    
+    
+    height: 100vh;
+    padding:0;
+    margin:0;
+    }
+
+h3{
+  position: absolute;
+  top: 0px;
+  left: 650px;
+}
+.start_timer{
+  /* top: -105px;
+  left: 206px; */
+  z-index: 10;
+  
+}
+#stop_timer_btn{
+  visibility: hidden;
+  top: 510px;
+  left: 870px;
+  position: absolute;
+}
+#start_timer_btn{
+  top: 510px;
+  left: 870px;
+  position: absolute;
+}
+.timer__items {
+  display: flex;
+  font-size: 48px;
+  top: 430px;
+  left: 820px;
+  position: absolute;
+  z-index: 9;
+}
+.timer__item {
+  position: relative;
+  min-width: 60px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-bottom: 15px;
+  text-align: center;
+}
+.timer__item::before {
+  content: attr(data-title);
+  display: block;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  font-size: 14px;
+}
+.timer__item:not(:last-child)::after {
+  content: ':';
+  position: absolute;
+  right: -15px;
+}
+
+/* ТАБЛИЦЫ ТАБЛИЦЫ ТАБЛИЦЫ */ /* ТАБЛИЦЫ ТАБЛИЦЫ ТАБЛИЦЫ *//* ТАБЛИЦЫ ТАБЛИЦЫ ТАБЛИЦЫ */
 #team1{
-    position: relative;
-    top: 10px;
-    left: 50px;
+    position: absolute;
+    top: 50px;
+    left: 200px;
+    z-index: 6;
+}
+#team2{
+  position: absolute;
+  top: 50px;
+  left: 1200px;
+  z-index: 6;
+}
+#team3{
+  position: absolute;
+  top: 500px;
+  left: 1200px;
+  z-index: 6;
+}
+#team4{
+  position: absolute;
+  top: 500px;
+  left: 200px;
+  z-index: 6;
 }
 .itogo{
     font-weight:bold;
     background-color: #ebcf30d5;
     font-style: italic;
-    font-size: 35px;
+    font-size: 30px;
 }
 .itogo_num{
     background-color: #ebcf30d5;
-    font-size: 30px;
+    font-size: 25px;
 }
 .pre_itogo{
     background-color: #f0d852d5;
@@ -195,7 +279,7 @@ li {
     background-color: #f7d755e0;
     text-align: center;
     font-weight:bold;
-    font-size: 30px;
+    font-size: 25px;
 }
 .tema{
     background-color: #7be2c3d5;
@@ -210,7 +294,7 @@ tbody tr:hover {
    }
   table {
     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-    font-size: 20px;
+    font-size: 18px;
     border-radius: 10px;
     border-spacing: 0;
     text-align: center;
@@ -230,10 +314,10 @@ tbody tr:hover {
     text-align: center;
     }
     th:first-child {
-    border-top-left-radius: 10px;
+    border-top-left-radius: 8px;
     }
     th:last-child {
-    border-top-right-radius: 10px;
+    border-top-right-radius: 8px;
     border-right: none;
     }
     td {

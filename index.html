@@ -9,10 +9,85 @@
   </head>
   <body>
       <h1 class="header" id = "blink1"> Решаем задачи </h1>
+    <h3>A = "Взвешивание"    B = "Разрезание"   C = "Вычисление"   D = "Задачи на доли" </h3>
 
+    <div class="timer">
+      <div class="timer__items">
+        <!-- <div class="timer__item timer__days">00</div> -->
+        <div class="timer__item timer__hours">00</div>
+        <div class="timer__item timer__minutes">00</div>
+        <div class="timer__item timer__seconds">00</div>
+      </div>
+    </div>
+    <button id = "stop_timer_btn" class = "start_timer"  onclick="changess()">Остановить таймер</button>
+        <script type="text/javascript">
+          function changess(){
+            document.getElementById("stop_timer_btn").style.visibility = "hidden";
+            document.getElementById("start_timer_btn").style.visibility = "visible";
+            clearInterval(window.timerId);
+            document.querySelector('.timer__hours').innerHTML = "00";
+            document.querySelector('.timer__minutes').innerHTML = "00";
+            document.querySelector('.timer__seconds').innerHTML = "00";
+          }
+          </script>
+        
+    <button id = "start_timer_btn" class = "start_timer" onclick="changes()">Запустить таймер</button>
+        <script type="text/javascript">
+        function changes(){
+          document.getElementById("start_timer_btn").style.visibility = "hidden";
+          document.getElementById("stop_timer_btn").style.visibility = "visible";
+        // alert(document.querySelector('.timer__hours'));
+        // document.querySelector('.timer__hours').dataset.title = declensionNum(0, ['час', 'часа', 'часов']);;
+        // document.querySelector('.timer__minutes').dataset.title = declensionNum(0, ['минута', 'минуты', 'минут']);
+        // document.querySelector('.timer__seconds').dataset.title = declensionNum(1, ['секунда', 'секунды', 'секунд']);        
+                    // конечная дата, например 1 июля 2021
+        // const deadline = new Date(2022, 06, 01);
+        // const deadline = new Date(hours=1) ;
+        var deadline= new Date();
+        var duration = prompt("Введите длительность таймера в секундах");
+        deadline.setSeconds(deadline.getSeconds() + Number(duration));
+        // new Date(year, month[, day[, hour[, minute[, second[, millisecond]]]]]);
+
+        // id таймера
+        window.timerId = null;
+
+        // склонение числительных
+        function declensionNum(num, words) {
+          return words[(num % 100 > 4 && num % 100 < 20) ? 2 : [2, 0, 1, 1, 1, 2][(num % 10 < 5) ? num % 10 : 5]];
+        }
+        // вычисляем разницу дат и устанавливаем оставшееся времени в качестве содержимого элементов
+        function countdownTimer() {
+          const diff = deadline - new Date();
+          if (diff <= 0) {
+            clearInterval(window.timerId);
+          }
+          // const days = diff > 0 ? Math.floor(diff / 1000 / 60 / 60 / 24) : 0;
+          const hours = diff > 0 ? Math.floor(diff / 1000 / 60 / 60) % 24 : 0;
+          const minutes = diff > 0 ? Math.floor(diff / 1000 / 60) % 60 : 0;
+          const seconds = diff > 0 ? Math.floor(diff / 1000) % 60 : 0;
+          // $days.textContent = days < 10 ? '0' + days : days;
+          $hours.textContent = hours < 10 ? '0' + hours : hours;
+          $minutes.textContent = minutes < 10 ? '0' + minutes : minutes;
+          $seconds.textContent = seconds < 10 ? '0' + seconds : seconds;
+          // $days.dataset.title = declensionNum(days, ['день', 'дня', 'дней']);
+          $hours.dataset.title = declensionNum(hours, ['час', 'часа', 'часов']);
+          $minutes.dataset.title = declensionNum(minutes, ['минута', 'минуты', 'минут']);
+          $seconds.dataset.title = declensionNum(seconds, ['секунда', 'секунды', 'секунд']);
+        }
+        // получаем элементы, содержащие компоненты даты
+        // const $days = document.querySelector('.timer__days');
+        const $hours = document.querySelector('.timer__hours');
+        const $minutes = document.querySelector('.timer__minutes');
+        const $seconds = document.querySelector('.timer__seconds');
+        // вызываем функцию countdownTimer
+        countdownTimer();
+        // вызываем функцию countdownTimer каждую секунду
+        window.timerId = setInterval(countdownTimer, 1000);
+  }
+        </script>
     <!-- ТАБЛИЦА 1 -->
     <table id="team1">
-        <caption> Команда 1 </caption>
+        <caption contenteditable="true"> Команда 1 </caption>
         <tr>
           <th class="mintablehead">Баллы</th>
           <!-- ТЕМЫ -->
@@ -26,116 +101,796 @@
          <tr>
           <td class="stoimost">5 </td>
           <td>
-              <select class="form-select" aria-label="Default select example">
-            <option value="a-5">X</option>
-            <option value="a10">VV</option>
-            <option value="a5">V</option>
-            <option selected value="a0">0</option>
-          </select>
+              <select name = "1"  class="form-select" aria-label="Default select example">
+                <option value="a0A|0" id = "Nothing" selected ></option>
+                <option value="a1A|5" id = "Accept">✔</option>
+                <option value="a2A|0" id = "Mistake">✖</option>
+                <option value="a3A|2.5" id = "Accept_mistake">✔✖</option>
+                <option value="a4A|0" id = "Error">✖✖</option>
+              </select>
         </td>
-          <td><select class="form-select" aria-label="Default select example">
-            <option value="b-5">X</option>
-            <option value="b10">VV</option>
-            <option value="b5">V</option>
-            <option selected value="b0">0</option>
-          </select>
+          <td>
+            <select name = "1"  class="form-select" aria-label="Default select example">
+              <option value="b0A|0" id = "Nothing" selected ></option>
+              <option value="b1A|5" id = "Accept">✔</option>
+              <option value="b2A|0" id = "Mistake">✖</option>
+              <option value="b3A|2.5" id = "Accept_mistake">✔✖</option>
+              <option value="b4A|0" id = "Error">✖✖</option>
+            </select>
         </td>
-          <td><select class="form-select" aria-label="Default select example">
-            <option value="c-5">X</option>
-            <option value="c10">VV</option>
-            <option value="c5">V</option>
-            <option selected value="c0">0</option>
-          </select>
+          <td>
+            <select name = "1"  class="form-select" aria-label="Default select example">
+              <option value="c0A|0" id = "Nothing" selected ></option>
+              <option value="c1A|5" id = "Accept">✔</option>
+              <option value="c2A|0" id = "Mistake">✖</option>
+              <option value="c3A|2.5" id = "Accept_mistake">✔✖</option>
+              <option value="c4A|0" id = "Error">✖✖</option>
+            </select>
         </td>
-          <td><select class="form-select" aria-label="Default select example">
+          <td>
+            <select name = "1"  class="form-select" aria-label="Default select example">
+              <option value="d0A|0" id = "Nothing" selected ></option>
+              <option value="d1A|5" id = "Accept">✔</option>
+              <option value="d2A|0" id = "Mistake">✖</option>
+              <option value="d3A|2.5" id = "Accept_mistake">✔✖</option>
+              <option value="d4A|0" id = "Error">✖✖</option>
+            </select>
+            <!-- <select name = "1"  class="form-select" aria-label="Default select example">
             <option value="d-5">X</option>
             <option value="d10">VV</option>
             <option value="d5">V</option>
             <option selected value="d0">0</option>
-          </select>
+          </select> -->
         </td>
          </tr>
          <!-- 10 бальные -->
         <tr>
           <td id="10" class="stoimost">10</td>
-          <td>50.2</td>
-          <td>40.63</td>
-          <td>45.23</td>
-          <td>39.3</td>
+          <td>
+            <select name = "1"  class="form-select" aria-label="Default select example">
+              <option value="a0B|0" id = "Nothing" selected ></option>
+              <option value="a1B|10" id = "Accept">✔</option>
+              <option value="a2B|0" id = "Mistake">✖</option>
+              <option value="a3B|5" id = "Accept_mistake">✔✖</option>
+              <option value="a4B|0" id = "Error">✖✖</option>
+            </select>
+          </td>
+          <td>
+            <select name = "1"  class="form-select" aria-label="Default select example">
+              <option value="b0B|0" id = "Nothing" selected ></option>
+              <option value="b1B|10" id = "Accept">✔</option>
+              <option value="b2B|0" id = "Mistake">✖</option>
+              <option value="b3B|5" id = "Accept_mistake">✔✖</option>
+              <option value="b4B|0" id = "Error">✖✖</option>
+            </select>
+          </td>
+          <td>
+            <select name = "1"  class="form-select" aria-label="Default select example">
+              <option value="c0B|0" id = "Nothing" selected ></option>
+              <option value="c1B|10" id = "Accept">✔</option>
+              <option value="c2B|0" id = "Mistake">✖</option>
+              <option value="c3B|5" id = "Accept_mistake">✔✖</option>
+              <option value="c4B|0" id = "Error">✖✖</option>
+            </select>
+          </td>
+          <td>
+            <select name = "1"  class="form-select" aria-label="Default select example">
+              <option value="d0B|0" id = "Nothing" selected ></option>
+              <option value="d1B|10" id = "Accept">✔</option>
+              <option value="d2B|0" id = "Mistake">✖</option>
+              <option value="d3B|5" id = "Accept_mistake">✔✖</option>
+              <option value="d4B|0" id = "Error">✖✖</option>
+            </select>
+          </td>
         </tr>
         <tr>
           <td id="15" class="stoimost">15</td>
-          <td>25.4</td>
-          <td>30.2</td>
-          <td>33.3</td>
-          <td>36.7</td>
+          <td>
+            <select name = "1"  class="form-select" aria-label="Default select example">
+              <option value="a0C|0" id = "Nothing" selected ></option>
+              <option value="a1C|15" id = "Accept">✔</option>
+              <option value="a2C|0" id = "Mistake">✖</option>
+              <option value="a3C|7.5" id = "Accept_mistake">✔✖</option>
+              <option value="a4C|0" id = "Error">✖✖</option>
+            </select>
+          </td>
+          <td>
+            <select name = "1"  class="form-select" aria-label="Default select example">
+              <option value="b0C|0" id = "Nothing" selected ></option>
+              <option value="b1C|15" id = "Accept">✔</option>
+              <option value="b2C|0" id = "Mistake">✖</option>
+              <option value="b3C|7.5" id = "Accept_mistake">✔✖</option>
+              <option value="b4C|0" id = "Error">✖✖</option>
+            </select>
+          </td>
+          <td>
+            <select name = "1"  class="form-select" aria-label="Default select example">
+              <option value="c0C|0" id = "Nothing" selected ></option>
+              <option value="c1C|15" id = "Accept">✔</option>
+              <option value="c2C|0" id = "Mistake">✖</option>
+              <option value="c3C|7.5" id = "Accept_mistake">✔✖</option>
+              <option value="c4C|0" id = "Error">✖✖</option>
+            </select>
+          </td>
+          <td>
+            <select name = "1"  class="form-select" aria-label="Default select example">
+              <option value="d0C|0" id = "Nothing" selected ></option>
+              <option value="d1C|15" id = "Accept">✔</option>
+              <option value="d2C|0" id = "Mistake">✖</option>
+              <option value="d3C|7.5" id = "Accept_mistake">✔✖</option>
+              <option value="d4C|0" id = "Error">✖✖</option>
+            </select>
+          </td>
         </tr>
         <tr>
           <td id="20" class="stoimost">20 </td>
-          <td>20.4</td>
-          <td>15.6</td>
-          <td>22.3</td>
-          <td>29.3</td>
+          <td>
+            <select name = "1"  class="form-select" aria-label="Default select example">
+              <option value="a0D|0" id = "Nothing" selected ></option>
+              <option value="a1D|20" id = "Accept">✔</option>
+              <option value="a2D|0" id = "Mistake">✖</option>
+              <option value="a3D|10" id = "Accept_mistake">✔✖</option>
+              <option value="a4D|0" id = "Error">✖✖</option>
+            </select>
+          </td>
+          <td>
+            <select name = "1"  class="form-select" aria-label="Default select example">
+              <option value="b0D|0" id = "Nothing" selected ></option>
+              <option value="b1D|20" id = "Accept">✔</option>
+              <option value="b2D|0" id = "Mistake">✖</option>
+              <option value="b3D|10" id = "Accept_mistake">✔✖</option>
+              <option value="b4D|0" id = "Error">✖✖</option>
+            </select>
+          </td>
+          <td>
+            <select name = "1"  class="form-select" aria-label="Default select example">
+              <option value="c0D|0" id = "Nothing" selected ></option>
+              <option value="c1D|20" id = "Accept">✔</option>
+              <option value="c2D|0" id = "Mistake">✖</option>
+              <option value="c3D|10" id = "Accept_mistake">✔✖</option>
+              <option value="c4D|0" id = "Error">✖✖</option>
+            </select>
+          </td>
+          <td>
+            <select name = "1"  class="form-select" aria-label="Default select example">
+              <option value="d0D|0" id = "Nothing" selected ></option>
+              <option value="d1D|20" id = "Accept">✔</option>
+              <option value="d2D|0" id = "Mistake">✖</option>
+              <option value="d3D|10" id = "Accept_mistake">✔✖</option>
+              <option value="d4D|0" id = "Error">✖✖</option>
+            </select>
+          </td>
         </tr>
         <tr>
             <td rowspan="2" id="sum" class="itogo">Итого</td>
-            <td id="apre" class="pre_itogo">20.4</td>
-            <td id="bpre" class="pre_itogo">15.6</td>
-            <td id="cpre" class="pre_itogo">22.3</td>
-            <td id="dpre" class="pre_itogo">29.3</td>
+            <td id="team1_apre" class="pre_itogo">0</td>
+            <td id="team1_bpre" class="pre_itogo">0</td>
+            <td id="team1_cpre" class="pre_itogo">0</td>
+            <td id="team1_dpre" class="pre_itogo">0</td>
           </tr>
-            <td id="team1_everything_sum" colspan="4" class="itogo_num">20.4</td>
+            <td id="team1_everything_sum" colspan="4" class="itogo_num">أَسْتَوْدِعُ اللهَ دِينِكَ، وَأَمَانَتَكَ، وَخَوَاتِمَ عَمَلِكَ ،  وَأَقْرَأُ عَلَيْكَ السَّلَامَ . اللَّهُمَّ اطْوِ لَهُ البَعِيدَ وَهَوِّنْ عَليهِ السَّفَرَ.  زَوَّدَكَ اللهُ التَّقْوَى، وَغَفَرَ اللهُ ذَنْبَكَ  ويَسَّرَ لَكَ الـخَيْرَ حَيْثُمَا كُنْتَ  جَعَلَ اللَّهُ التَّقْوَى زَادَكَ، وَغَفَرَ ذَنْبَكَ، وَوَجَّهَكَ لِلْخَيْرِ  حَيْثُ مَا ت</td>
         </tbody>
         </table>
+        <!-- ТАБЛИЦА 2 -->
+        <table id="team2">
+          <caption contenteditable="true"> Команда 2 </caption>
+          <tr>
+            <th class="mintablehead">Баллы</th>
+            <!-- ТЕМЫ -->
+            <th class="tema">A</th>
+            <th class="tema">B</th>
+            <th class="tema">C</th>
+            <th class="tema">D</th>
+            </tr>
+          <tbody>
+              <!-- 5 бальные -->
+           <tr>
+            <td class="stoimost">5 </td>
+            <td>
+                <select name = "2"  class="form-select" aria-label="Default select example">
+                  <option value="a0A|0" id = "Nothing" selected ></option>
+                  <option value="a1A|5" id = "Accept">✔</option>
+                  <option value="a2A|0" id = "Mistake">✖</option>
+                  <option value="a3A|2.5" id = "Accept_mistake">✔✖</option>
+                  <option value="a4A|0" id = "Error">✖✖</option>
+                </select>
+          </td>
+            <td>
+              <select name = "2"  class="form-select" aria-label="Default select example">
+                <option value="b0A|0" id = "Nothing" selected ></option>
+                <option value="b1A|5" id = "Accept">✔</option>
+                <option value="b2A|0" id = "Mistake">✖</option>
+                <option value="b3A|2.5" id = "Accept_mistake">✔✖</option>
+                <option value="b4A|0" id = "Error">✖✖</option>
+              </select>
+          </td>
+            <td>
+              <select name = "2"  class="form-select" aria-label="Default select example">
+                <option value="c0A|0" id = "Nothing" selected ></option>
+                <option value="c1A|5" id = "Accept">✔</option>
+                <option value="c2A|0" id = "Mistake">✖</option>
+                <option value="c3A|2.5" id = "Accept_mistake">✔✖</option>
+                <option value="c4A|0" id = "Error">✖✖</option>
+              </select>
+          </td>
+            <td>
+              <select name = "2"  class="form-select" aria-label="Default select example">
+                <option value="d0A|0" id = "Nothing" selected ></option>
+                <option value="d1A|5" id = "Accept">✔</option>
+                <option value="d2A|0" id = "Mistake">✖</option>
+                <option value="d3A|2.5" id = "Accept_mistake">✔✖</option>
+                <option value="d4A|0" id = "Error">✖✖</option>
+              </select>
+              <!-- <select name = "1"  class="form-select" aria-label="Default select example">
+              <option value="d-5">X</option>
+              <option value="d10">VV</option>
+              <option value="d5">V</option>
+              <option selected value="d0">0</option>
+            </select> -->
+          </td>
+           </tr>
+           <!-- 10 бальные -->
+          <tr>
+            <td id="10" class="stoimost">10</td>
+            <td>
+              <select name = "2"  class="form-select" aria-label="Default select example">
+                <option value="a0B|0" id = "Nothing" selected ></option>
+                <option value="a1B|10" id = "Accept">✔</option>
+                <option value="a2B|0" id = "Mistake">✖</option>
+                <option value="a3B|5" id = "Accept_mistake">✔✖</option>
+                <option value="a4B|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "2"  class="form-select" aria-label="Default select example">
+                <option value="b0B|0" id = "Nothing" selected ></option>
+                <option value="b1B|10" id = "Accept">✔</option>
+                <option value="b2B|0" id = "Mistake">✖</option>
+                <option value="b3B|5" id = "Accept_mistake">✔✖</option>
+                <option value="b4B|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "2"  class="form-select" aria-label="Default select example">
+                <option value="c0B|0" id = "Nothing" selected ></option>
+                <option value="c1B|10" id = "Accept">✔</option>
+                <option value="c2B|0" id = "Mistake">✖</option>
+                <option value="c3B|5" id = "Accept_mistake">✔✖</option>
+                <option value="c4B|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "2"  class="form-select" aria-label="Default select example">
+                <option value="d0B|0" id = "Nothing" selected ></option>
+                <option value="d1B|10" id = "Accept">✔</option>
+                <option value="d2B|0" id = "Mistake">✖</option>
+                <option value="d3B|5" id = "Accept_mistake">✔✖</option>
+                <option value="d4B|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td id="15" class="stoimost">15</td>
+            <td>
+              <select name = "2"  class="form-select" aria-label="Default select example">
+                <option value="a0C|0" id = "Nothing" selected ></option>
+                <option value="a1C|15" id = "Accept">✔</option>
+                <option value="a2C|0" id = "Mistake">✖</option>
+                <option value="a3C|7.5" id = "Accept_mistake">✔✖</option>
+                <option value="a4C|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "2"  class="form-select" aria-label="Default select example">
+                <option value="b0C|0" id = "Nothing" selected ></option>
+                <option value="b1C|15" id = "Accept">✔</option>
+                <option value="b2C|0" id = "Mistake">✖</option>
+                <option value="b3C|7.5" id = "Accept_mistake">✔✖</option>
+                <option value="b4C|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "2"  class="form-select" aria-label="Default select example">
+                <option value="c0C|0" id = "Nothing" selected ></option>
+                <option value="c1C|15" id = "Accept">✔</option>
+                <option value="c2C|0" id = "Mistake">✖</option>
+                <option value="c3C|7.5" id = "Accept_mistake">✔✖</option>
+                <option value="c4C|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "2"  class="form-select" aria-label="Default select example">
+                <option value="d0C|0" id = "Nothing" selected ></option>
+                <option value="d1C|15" id = "Accept">✔</option>
+                <option value="d2C|0" id = "Mistake">✖</option>
+                <option value="d3C|7.5" id = "Accept_mistake">✔✖</option>
+                <option value="d4C|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td id="20" class="stoimost">20 </td>
+            <td>
+              <select name = "2"  class="form-select" aria-label="Default select example">
+                <option value="a0D|0" id = "Nothing" selected ></option>
+                <option value="a1D|20" id = "Accept">✔</option>
+                <option value="a2D|0" id = "Mistake">✖</option>
+                <option value="a3D|10" id = "Accept_mistake">✔✖</option>
+                <option value="a4D|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "2"  class="form-select" aria-label="Default select example">
+                <option value="b0D|0" id = "Nothing" selected ></option>
+                <option value="b1D|20" id = "Accept">✔</option>
+                <option value="b2D|0" id = "Mistake">✖</option>
+                <option value="b3D|10" id = "Accept_mistake">✔✖</option>
+                <option value="b4D|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "2"  class="form-select" aria-label="Default select example">
+                <option value="c0D|0" id = "Nothing" selected ></option>
+                <option value="c1D|20" id = "Accept">✔</option>
+                <option value="c2D|0" id = "Mistake">✖</option>
+                <option value="c3D|10" id = "Accept_mistake">✔✖</option>
+                <option value="c4D|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "2"  class="form-select" aria-label="Default select example">
+                <option value="d0D|0" id = "Nothing" selected ></option>
+                <option value="d1D|20" id = "Accept">✔</option>
+                <option value="d2D|0" id = "Mistake">✖</option>
+                <option value="d3D|10" id = "Accept_mistake">✔✖</option>
+                <option value="d4D|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+              <td rowspan="2" id="sum" class="itogo">Итого</td>
+              <td id="team2_apre" class="pre_itogo">0</td>
+              <td id="team2_bpre" class="pre_itogo">0</td>
+              <td id="team2_cpre" class="pre_itogo">0</td>
+              <td id="team2_dpre" class="pre_itogo">0</td>
+            </tr>
+              <td id="team2_everything_sum" colspan="4" class="itogo_num">أَسْتَوْدِعُ اللهَ دِينِكَ، وَأَمَانَتَكَ، وَخَوَاتِمَ عَمَلِكَ ،  وَأَقْرَأُ عَلَيْكَ السَّلَامَ . اللَّهُمَّ اطْوِ لَهُ البَعِيدَ وَهَوِّنْ عَليهِ السَّفَرَ.  زَوَّدَكَ اللهُ التَّقْوَى، وَغَفَرَ اللهُ ذَنْبَكَ  ويَسَّرَ لَكَ الـخَيْرَ حَيْثُمَا كُنْتَ  جَعَلَ اللَّهُ التَّقْوَى زَادَكَ، وَغَفَرَ ذَنْبَكَ، وَوَجَّهَكَ لِلْخَيْرِ  حَيْثُ مَا ت</td>
+          </tbody>
+          </table>
+        <!-- ТАБЛИЦА 3 -->
+        <table id="team3">
+          <caption contenteditable="true"> Команда 3 </caption>
+          <tr>
+            <th class="mintablehead">Баллы</th>
+            <!-- ТЕМЫ -->
+            <th class="tema">A</th>
+            <th class="tema">B</th>
+            <th class="tema">C</th>
+            <th class="tema">D</th>
+            </tr>
+          <tbody>
+              <!-- 5 бальные -->
+           <tr>
+            <td class="stoimost">5 </td>
+            <td>
+                <select name = "3"   class="form-select" aria-label="Default select example">
+                  <option value="a0A|0" id = "Nothing" selected ></option>
+                  <option value="a1A|5" id = "Accept">✔</option>
+                  <option value="a2A|0" id = "Mistake">✖</option>
+                  <option value="a3A|2.5" id = "Accept_mistake">✔✖</option>
+                  <option value="a4A|0" id = "Error">✖✖</option>
+                </select>
+          </td>
+            <td>
+              <select name = "3"   class="form-select" aria-label="Default select example">
+                <option value="b0A|0" id = "Nothing" selected ></option>
+                <option value="b1A|5" id = "Accept">✔</option>
+                <option value="b2A|0" id = "Mistake">✖</option>
+                <option value="b3A|2.5" id = "Accept_mistake">✔✖</option>
+                <option value="b4A|0" id = "Error">✖✖</option>
+              </select>
+          </td>
+            <td>
+              <select name = "3"   class="form-select" aria-label="Default select example">
+                <option value="c0A|0" id = "Nothing" selected ></option>
+                <option value="c1A|5" id = "Accept">✔</option>
+                <option value="c2A|0" id = "Mistake">✖</option>
+                <option value="c3A|2.5" id = "Accept_mistake">✔✖</option>
+                <option value="c4A|0" id = "Error">✖✖</option>
+              </select>
+          </td>
+            <td>
+              <select name = "3"   class="form-select" aria-label="Default select example">
+                <option value="d0A|0" id = "Nothing" selected ></option>
+                <option value="d1A|5" id = "Accept">✔</option>
+                <option value="d2A|0" id = "Mistake">✖</option>
+                <option value="d3A|2.5" id = "Accept_mistake">✔✖</option>
+                <option value="d4A|0" id = "Error">✖✖</option>
+              </select>
+              <!-- <select name = "1"  class="form-select" aria-label="Default select example">
+              <option value="d-5">X</option>
+              <option value="d10">VV</option>
+              <option value="d5">V</option>
+              <option selected value="d0">0</option>
+            </select> -->
+          </td>
+           </tr>
+           <!-- 10 бальные -->
+          <tr>
+            <td id="10" class="stoimost">10</td>
+            <td>
+              <select name = "3"   class="form-select" aria-label="Default select example">
+                <option value="a0B|0" id = "Nothing" selected ></option>
+                <option value="a1B|10" id = "Accept">✔</option>
+                <option value="a2B|0" id = "Mistake">✖</option>
+                <option value="a3B|5" id = "Accept_mistake">✔✖</option>
+                <option value="a4B|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "3"   class="form-select" aria-label="Default select example">
+                <option value="b0B|0" id = "Nothing" selected ></option>
+                <option value="b1B|10" id = "Accept">✔</option>
+                <option value="b2B|0" id = "Mistake">✖</option>
+                <option value="b3B|5" id = "Accept_mistake">✔✖</option>
+                <option value="b4B|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "3"   class="form-select" aria-label="Default select example">
+                <option value="c0B|0" id = "Nothing" selected ></option>
+                <option value="c1B|10" id = "Accept">✔</option>
+                <option value="c2B|0" id = "Mistake">✖</option>
+                <option value="c3B|5" id = "Accept_mistake">✔✖</option>
+                <option value="c4B|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "3"   class="form-select" aria-label="Default select example">
+                <option value="d0B|0" id = "Nothing" selected ></option>
+                <option value="d1B|10" id = "Accept">✔</option>
+                <option value="d2B|0" id = "Mistake">✖</option>
+                <option value="d3B|5" id = "Accept_mistake">✔✖</option>
+                <option value="d4B|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td id="15" class="stoimost">15</td>
+            <td>
+              <select name = "3"   class="form-select" aria-label="Default select example">
+                <option value="a0C|0" id = "Nothing" selected ></option>
+                <option value="a1C|15" id = "Accept">✔</option>
+                <option value="a2C|0" id = "Mistake">✖</option>
+                <option value="a3C|7.5" id = "Accept_mistake">✔✖</option>
+                <option value="a4C|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "3"   class="form-select" aria-label="Default select example">
+                <option value="b0C|0" id = "Nothing" selected ></option>
+                <option value="b1C|15" id = "Accept">✔</option>
+                <option value="b2C|0" id = "Mistake">✖</option>
+                <option value="b3C|7.5" id = "Accept_mistake">✔✖</option>
+                <option value="b4C|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "3"   class="form-select" aria-label="Default select example">
+                <option value="c0C|0" id = "Nothing" selected ></option>
+                <option value="c1C|15" id = "Accept">✔</option>
+                <option value="c2C|0" id = "Mistake">✖</option>
+                <option value="c3C|7.5" id = "Accept_mistake">✔✖</option>
+                <option value="c4C|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "3"   class="form-select" aria-label="Default select example">
+                <option value="d0C|0" id = "Nothing" selected ></option>
+                <option value="d1C|15" id = "Accept">✔</option>
+                <option value="d2C|0" id = "Mistake">✖</option>
+                <option value="d3C|7.5" id = "Accept_mistake">✔✖</option>
+                <option value="d4C|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td id="20" class="stoimost">20 </td>
+            <td>
+              <select name = "3"   class="form-select" aria-label="Default select example">
+                <option value="a0D|0" id = "Nothing" selected ></option>
+                <option value="a1D|20" id = "Accept">✔</option>
+                <option value="a2D|0" id = "Mistake">✖</option>
+                <option value="a3D|10" id = "Accept_mistake">✔✖</option>
+                <option value="a4D|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "3"   class="form-select" aria-label="Default select example">
+                <option value="b0D|0" id = "Nothing" selected ></option>
+                <option value="b1D|20" id = "Accept">✔</option>
+                <option value="b2D|0" id = "Mistake">✖</option>
+                <option value="b3D|10" id = "Accept_mistake">✔✖</option>
+                <option value="b4D|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "3"   class="form-select" aria-label="Default select example">
+                <option value="c0D|0" id = "Nothing" selected ></option>
+                <option value="c1D|20" id = "Accept">✔</option>
+                <option value="c2D|0" id = "Mistake">✖</option>
+                <option value="c3D|10" id = "Accept_mistake">✔✖</option>
+                <option value="c4D|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "3"   class="form-select" aria-label="Default select example">
+                <option value="d0D|0" id = "Nothing" selected ></option>
+                <option value="d1D|20" id = "Accept">✔</option>
+                <option value="d2D|0" id = "Mistake">✖</option>
+                <option value="d3D|10" id = "Accept_mistake">✔✖</option>
+                <option value="d4D|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+              <td rowspan="2" id="sum" class="itogo">Итого</td>
+              <td id="team3_apre" class="pre_itogo">0</td>
+              <td id="team3_bpre" class="pre_itogo">0</td>
+              <td id="team3_cpre" class="pre_itogo">0</td>
+              <td id="team3_dpre" class="pre_itogo">0</td>
+            </tr>
+              <td id="team3_everything_sum" colspan="4" class="itogo_num">أَسْتَوْدِعُ اللهَ دِينِكَ، وَأَمَانَتَكَ، وَخَوَاتِمَ عَمَلِكَ ،  وَأَقْرَأُ عَلَيْكَ السَّلَامَ . اللَّهُمَّ اطْوِ لَهُ البَعِيدَ وَهَوِّنْ عَليهِ السَّفَرَ.  زَوَّدَكَ اللهُ التَّقْوَى، وَغَفَرَ اللهُ ذَنْبَكَ  ويَسَّرَ لَكَ الـخَيْرَ حَيْثُمَا كُنْتَ  جَعَلَ اللَّهُ التَّقْوَى زَادَكَ، وَغَفَرَ ذَنْبَكَ، وَوَجَّهَكَ لِلْخَيْرِ  حَيْثُ مَا ت</td>
+          </tbody>
+          </table>
+        <!-- ТАБЛИЦА 4 -->
+        <table id="team4">
+          <caption contenteditable="true"> Команда 4 </caption>
+          <tr>
+            <th class="mintablehead">Баллы</th>
+            <!-- ТЕМЫ -->
+            <th class="tema">A</th>
+            <th class="tema">B</th>
+            <th class="tema">C</th>
+            <th class="tema">D</th>
+            </tr>
+          <tbody>
+              <!-- 5 бальные -->
+           <tr>
+            <td class="stoimost">5 </td>
+            <td>
+                <select name = "4"    class="form-select" aria-label="Default select example">
+                  <option value="a0A|0" id = "Nothing" selected ></option>
+                  <option value="a1A|5" id = "Accept">✔</option>
+                  <option value="a2A|0" id = "Mistake">✖</option>
+                  <option value="a3A|2.5" id = "Accept_mistake">✔✖</option>
+                  <option value="a4A|0" id = "Error">✖✖</option>
+                </select>
+          </td>
+            <td>
+              <select name = "4"    class="form-select" aria-label="Default select example">
+                <option value="b0A|0" id = "Nothing" selected ></option>
+                <option value="b1A|5" id = "Accept">✔</option>
+                <option value="b2A|0" id = "Mistake">✖</option>
+                <option value="b3A|2.5" id = "Accept_mistake">✔✖</option>
+                <option value="b4A|0" id = "Error">✖✖</option>
+              </select>
+          </td>
+            <td>
+              <select name = "4"    class="form-select" aria-label="Default select example">
+                <option value="c0A|0" id = "Nothing" selected ></option>
+                <option value="c1A|5" id = "Accept">✔</option>
+                <option value="c2A|0" id = "Mistake">✖</option>
+                <option value="c3A|2.5" id = "Accept_mistake">✔✖</option>
+                <option value="c4A|0" id = "Error">✖✖</option>
+              </select>
+          </td>
+            <td>
+              <select name = "4"    class="form-select" aria-label="Default select example">
+                <option value="d0A|0" id = "Nothing" selected ></option>
+                <option value="d1A|5" id = "Accept">✔</option>
+                <option value="d2A|0" id = "Mistake">✖</option>
+                <option value="d3A|2.5" id = "Accept_mistake">✔✖</option>
+                <option value="d4A|0" id = "Error">✖✖</option>
+              </select>
+              <!-- <select name = "1"  class="form-select" aria-label="Default select example">
+              <option value="d-5">X</option>
+              <option value="d10">VV</option>
+              <option value="d5">V</option>
+              <option selected value="d0">0</option>
+            </select> -->
+          </td>
+           </tr>
+           <!-- 10 бальные -->
+          <tr>
+            <td id="10" class="stoimost">10</td>
+            <td>
+              <select name = "4"    class="form-select" aria-label="Default select example">
+                <option value="a0B|0" id = "Nothing" selected ></option>
+                <option value="a1B|10" id = "Accept">✔</option>
+                <option value="a2B|0" id = "Mistake">✖</option>
+                <option value="a3B|5" id = "Accept_mistake">✔✖</option>
+                <option value="a4B|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "4"    class="form-select" aria-label="Default select example">
+                <option value="b0B|0" id = "Nothing" selected ></option>
+                <option value="b1B|10" id = "Accept">✔</option>
+                <option value="b2B|0" id = "Mistake">✖</option>
+                <option value="b3B|5" id = "Accept_mistake">✔✖</option>
+                <option value="b4B|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "4"    class="form-select" aria-label="Default select example">
+                <option value="c0B|0" id = "Nothing" selected ></option>
+                <option value="c1B|10" id = "Accept">✔</option>
+                <option value="c2B|0" id = "Mistake">✖</option>
+                <option value="c3B|5" id = "Accept_mistake">✔✖</option>
+                <option value="c4B|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "4"    class="form-select" aria-label="Default select example">
+                <option value="d0B|0" id = "Nothing" selected ></option>
+                <option value="d1B|10" id = "Accept">✔</option>
+                <option value="d2B|0" id = "Mistake">✖</option>
+                <option value="d3B|5" id = "Accept_mistake">✔✖</option>
+                <option value="d4B|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td id="15" class="stoimost">15</td>
+            <td>
+              <select name = "4"    class="form-select" aria-label="Default select example">
+                <option value="a0C|0" id = "Nothing" selected ></option>
+                <option value="a1C|15" id = "Accept">✔</option>
+                <option value="a2C|0" id = "Mistake">✖</option>
+                <option value="a3C|7.5" id = "Accept_mistake">✔✖</option>
+                <option value="a4C|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "4"    class="form-select" aria-label="Default select example">
+                <option value="b0C|0" id = "Nothing" selected ></option>
+                <option value="b1C|15" id = "Accept">✔</option>
+                <option value="b2C|0" id = "Mistake">✖</option>
+                <option value="b3C|7.5" id = "Accept_mistake">✔✖</option>
+                <option value="b4C|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "4"    class="form-select" aria-label="Default select example">
+                <option value="c0C|0" id = "Nothing" selected ></option>
+                <option value="c1C|15" id = "Accept">✔</option>
+                <option value="c2C|0" id = "Mistake">✖</option>
+                <option value="c3C|7.5" id = "Accept_mistake">✔✖</option>
+                <option value="c4C|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "4"    class="form-select" aria-label="Default select example">
+                <option value="d0C|0" id = "Nothing" selected ></option>
+                <option value="d1C|15" id = "Accept">✔</option>
+                <option value="d2C|0" id = "Mistake">✖</option>
+                <option value="d3C|7.5" id = "Accept_mistake">✔✖</option>
+                <option value="d4C|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td id="20" class="stoimost">20 </td>
+            <td>
+              <select name = "4"    class="form-select" aria-label="Default select example">
+                <option value="a0D|0" id = "Nothing" selected ></option>
+                <option value="a1D|20" id = "Accept">✔</option>
+                <option value="a2D|0" id = "Mistake">✖</option>
+                <option value="a3D|10" id = "Accept_mistake">✔✖</option>
+                <option value="a4D|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "4"    class="form-select" aria-label="Default select example">
+                <option value="b0D|0" id = "Nothing" selected ></option>
+                <option value="b1D|20" id = "Accept">✔</option>
+                <option value="b2D|0" id = "Mistake">✖</option>
+                <option value="b3D|10" id = "Accept_mistake">✔✖</option>
+                <option value="b4D|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "4"    class="form-select" aria-label="Default select example">
+                <option value="c0D|0" id = "Nothing" selected ></option>
+                <option value="c1D|20" id = "Accept">✔</option>
+                <option value="c2D|0" id = "Mistake">✖</option>
+                <option value="c3D|10" id = "Accept_mistake">✔✖</option>
+                <option value="c4D|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+            <td>
+              <select name = "4"    class="form-select" aria-label="Default select example">
+                <option value="d0D|0" id = "Nothing" selected ></option>
+                <option value="d1D|20" id = "Accept">✔</option>
+                <option value="d2D|0" id = "Mistake">✖</option>
+                <option value="d3D|10" id = "Accept_mistake">✔✖</option>
+                <option value="d4D|0" id = "Error">✖✖</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+              <td rowspan="2" id="sum" class="itogo">Итого</td>
+              <td id="team4_apre" class="pre_itogo">0</td>
+              <td id="team4_bpre" class="pre_itogo">0</td>
+              <td id="team4_cpre" class="pre_itogo">0</td>
+              <td id="team4_dpre" class="pre_itogo">0</td>
+            </tr>
+              <td id="team4_everything_sum" colspan="4" class="itogo_num">أَسْتَوْدِعُ اللهَ دِينِكَ، وَأَمَانَتَكَ، وَخَوَاتِمَ عَمَلِكَ ،  وَأَقْرَأُ عَلَيْكَ السَّلَامَ . اللَّهُمَّ اطْوِ لَهُ البَعِيدَ وَهَوِّنْ عَليهِ السَّفَرَ.  زَوَّدَكَ اللهُ التَّقْوَى، وَغَفَرَ اللهُ ذَنْبَكَ  ويَسَّرَ لَكَ الـخَيْرَ حَيْثُمَا كُنْتَ  جَعَلَ اللَّهُ التَّقْوَى زَادَكَ، وَغَفَرَ ذَنْبَكَ، وَوَجَّهَكَ لِلْخَيْرِ  حَيْثُ مَا ت</td>
+          </tbody>
+          </table>
 
-        
         <button class = "clear_cash" onclick="change()">Очистить кеш</button>
         <script type="text/javascript">
             function change(){
                 localStorage.clear()
-
+                // document.css("background-image", "");
+                document.body.style.backgroundImage = "url('')";
                 //// Таблица команды 1
-                // Тема A
                 localStorage["team1_a_sum"] = 0;
-                document.getElementById("apre").innerHTML = localStorage["team1_a_sum"];
+                document.getElementById("team1_apre").innerHTML = localStorage["team1_a_sum"];
                 localStorage["team1_b_sum"] = 0;
-                document.getElementById("bpre").innerHTML = localStorage["team1_b_sum"];
+                document.getElementById("team1_bpre").innerHTML = localStorage["team1_b_sum"];
                 localStorage["team1_c_sum"] = 0;
-                document.getElementById("cpre").innerHTML = localStorage["team1_c_sum"];
+                document.getElementById("team1_cpre").innerHTML = localStorage["team1_c_sum"];
                 localStorage["team1_d_sum"] = 0;
-                document.getElementById("dpre").innerHTML = localStorage["team1_d_sum"];
-
+                document.getElementById("team1_dpre").innerHTML = localStorage["team1_d_sum"];
+                
                 localStorage["team1_sum"] = 0;
                 document.getElementById("team1_everything_sum").innerHTML = localStorage["team1_sum"];
                 
+                //// Таблица команды 2
+                localStorage["team2_a_sum"] = 0;
+                document.getElementById("team2_apre").innerHTML = localStorage["team2_a_sum"];
+                localStorage["team2_b_sum"] = 0;
+                document.getElementById("team2_bpre").innerHTML = localStorage["team2_b_sum"];
+                localStorage["team2_c_sum"] = 0;
+                document.getElementById("team2_cpre").innerHTML = localStorage["team2_c_sum"];
+                localStorage["team2_d_sum"] = 0;
+                document.getElementById("team2_dpre").innerHTML = localStorage["team2_d_sum"];
+                
+                localStorage["team2_sum"] = 0;
+                document.getElementById("team2_everything_sum").innerHTML = localStorage["team2_sum"];
+                
+                //// Таблица команды 3
+                localStorage["team3_a_sum"] = 0;
+                document.getElementById("team3_apre").innerHTML = localStorage["team3_a_sum"];
+                localStorage["team3_b_sum"] = 0;
+                document.getElementById("team3_bpre").innerHTML = localStorage["team3_b_sum"];
+                localStorage["team3_c_sum"] = 0;
+                document.getElementById("team3_cpre").innerHTML = localStorage["team3_c_sum"];
+                localStorage["team3_d_sum"] = 0;
+                document.getElementById("team3_dpre").innerHTML = localStorage["team3_d_sum"];
+                
+                localStorage["team3_sum"] = 0;
+                document.getElementById("team3_everything_sum").innerHTML = localStorage["team3_sum"];
 
+                //// Таблица команды 4
+                localStorage["team4_a_sum"] = 0;
+                document.getElementById("team4_apre").innerHTML = localStorage["team4_a_sum"];
+                localStorage["team4_b_sum"] = 0;
+                document.getElementById("team4_bpre").innerHTML = localStorage["team4_b_sum"];
+                localStorage["team4_c_sum"] = 0;
+                document.getElementById("team4_cpre").innerHTML = localStorage["team4_c_sum"];
+                localStorage["team4_d_sum"] = 0;
+                document.getElementById("team4_dpre").innerHTML = localStorage["team4_d_sum"];
+                
+                localStorage["team4_sum"] = 0;
+                document.getElementById("team4_everything_sum").innerHTML = localStorage["team4_sum"];
                 // document.getElementById("everything_sum").innerHTML = parseInt(localStorage["team1_a_sum"]) + parseInt(localStorage["team1_b_sum"] + parseInt(localStorage["team1_c_sum"]) + parseInt(localStorage["team1_d_sum"]));
             }
         </script>
-
-        <!-- <ul> 
-            <li><button>Суп-харчо</button></li> 
-            <li><a href="linkc2.html">Лилибдж</a></li> 
-            <li><a href="linkc3.html">Чихиртма</a></li> 
-            <li><a href="linkc4.html" class="brd">Шашлык</a></li> 
-           </ul> 
-        <p id="simple">Всё просто</p>
-        <button onclick="change()">Изменить текст</button>
-        <script type="text/javascript">
-            function change(){
-                document.getElementById("simple").innerHTML="Новый текст!";
-            }
-        </script> -->
-    <!-- <h1>Task List</h1>
-    <p id="msg">Current tasks:</p>
-    <ul>
-      <li class="list">Add visual styles</li>
-      <li class="list">Add light and dark themes</li>
-      <li>Enable switching the theme</li>
-    </ul>
-    <div>
-        <button class="btn">Dark</button>
-      </div> -->
+      <!-- <img src="https://media1.giphy.com/media/10FwycrnAkpshW/giphy.gif" alt="я джифка"> -->
     <script src="app.js"></script>
     <noscript>You need to enable JavaScript to view the full site.</noscript>
   </body>
